@@ -2,10 +2,8 @@ on: [push, pull_request]
 
 name: Continuous integration
 
-# Things this ci.yml doesn't do:
-# - Run on multiple OSes
-# - Run with multiple features
-# - 
+env:
+  msrv: 1.41.0
 
 jobs:
   test:
@@ -15,6 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         name:
+          - MSRV
           - stable
           - beta
           - nightly
@@ -23,6 +22,8 @@ jobs:
           - no features
 
         include:
+          - name: MSRV
+            toolchain: ${{ env.minrust }}
           - name: beta
             toolchain: beta
           - name: nightly
