@@ -6,7 +6,9 @@ fn formatting_is_broken_too()
 }
 
 #[cfg(feature = "myfeature")]
-ThisWillOnlyFailToCompileIfMyfeatureIsIncluded;
+fn what() {
+    ThisWillOnlyFailToCompileIfMyfeatureIsIncluded
+}
 
 #[cfg(test)]
 mod tests {
