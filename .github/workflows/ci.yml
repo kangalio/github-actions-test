@@ -24,19 +24,38 @@ jobs:
 
   test:
     name: Test Suite
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os || 'ubuntu-latest' }}
     strategy:
       fail-fast: false
       matrix:
-        features: ["", "serde"]
+        name:
+          - stable
+          - beta
+          - nightly
+          - macOS
+          - Windows
+          - no features
+
+        include:
+          - name: beta
+            toolchain: beta
+          - name: nightly
+            toolchain: nightly
+          - name: macOS
+            os: macOS-latest
+          - name: Windows
+            os: windows-latest
+          - name: no features
+            feature_flags: --no-default-features
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: stable
+          toolchain: ${{ matrix.toolchain || 'stable' }}
           override: true
-      - run: cargo test --features "${{ matrix.features }}"
+      - run: cargo test ${{ matrix.features || '--all-features' }}
 
   fmt:
     name: Rustfmt
