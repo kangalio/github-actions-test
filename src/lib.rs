@@ -1,3 +1,5 @@
+#![feature(box_syntax)]
+
 fn formatting_is_broken_too()
 {
     if { true } { /* oh and trigger clippy */}
