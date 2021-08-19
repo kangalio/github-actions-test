@@ -2,9 +2,6 @@ on: [push, pull_request]
 
 name: Continuous integration
 
-env:
-  msrv: 1.41.0
-
 jobs:
   test:
     name: Test Suite
@@ -23,7 +20,7 @@ jobs:
 
         include:
           - name: MSRV
-            toolchain: ${{ env.msrv }}
+            toolchain: 1.41.0
           - name: beta
             toolchain: beta
           - name: nightly
