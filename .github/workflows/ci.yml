@@ -55,7 +55,7 @@ jobs:
           profile: minimal
           toolchain: ${{ matrix.toolchain || 'stable' }}
           override: true
-      - run: cargo test ${{ matrix.features || '--all-features' }}
+      - run: cargo test ${{ matrix.feature_flags || '--all-features' }}
 
   fmt:
     name: Rustfmt

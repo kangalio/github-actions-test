@@ -5,9 +5,9 @@ fn formatting_is_broken_too()
     use std::os::unix; // and this will only be caught when running on windows
 }
 
-#[cfg(feature = "myfeature")]
+#[cfg(not(feature = "myfeature"))]
 fn what() {
-    ThisWillOnlyFailToCompileIfMyfeatureIsIncluded
+    ThisWillOnlyFailToCompileIfMyfeatureIsNotIncluded
 }
 
 #[cfg(test)]
